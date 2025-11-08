@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -17,7 +16,6 @@
             },
         }
     </script>
-    <!-- Add Inter font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,7 +23,7 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Simple loading spinner */
+
         .loader {
             border: 4px solid #f3f3f3;
             border-top: 4px solid #3498db;
@@ -45,10 +43,8 @@
 
     <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-2xl w-full max-w-md">
         
-        <!-- Header -->
         <h1 class="text-3xl font-bold text-center mb-6 text-blue-400">Weather Finder</h1>
 
-        <!-- Search Bar -->
         <div class="flex mb-4">
             <input 
                 type="text" 
@@ -64,18 +60,13 @@
             </button>
         </div>
 
-        <!-- Loading Spinner (hidden by default) -->
         <div id="loader" class="loader hidden"></div>
 
-        <!-- Error Message (hidden by default) -->
         <div id="errorMessage" class="hidden bg-red-500 text-white p-3 rounded-lg text-center font-medium">
-            <!-- Error text will be inserted here -->
         </div>
 
-        <!-- Weather Display (hidden by default) -->
         <div id="weatherDisplay" class="hidden text-center space-y-4 mt-6">
             
-            <!-- Location and Icon -->
             <div>
                 <h2 id="cityName" class="text-4xl font-bold">City Name</h2>
                 <div class="flex items-center justify-center">
@@ -84,10 +75,8 @@
                 </div>
             </div>
 
-            <!-- Temperature -->
             <p id="temperature" class="text-6xl font-extrabold">--°C</p>
 
-            <!-- Other Details (Humidity, Wind) -->
             <div class="flex justify-around bg-gray-700 p-4 rounded-lg shadow-inner">
                 <div class="text-center">
                     <span class="text-sm text-gray-400 block">Humidity</span>
@@ -109,11 +98,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- IMPORTANT ---
-            // Replace 'YOUR_API_KEY' with your own API key from OpenWeatherMap
+
             const apiKey = 'a50418109367bf6876f99552d05a3055';
 
-            // Get DOM elements
             const cityInput = document.getElementById('cityInput');
             const searchButton = document.getElementById('searchButton');
             const loader = document.getElementById('loader');
@@ -128,31 +115,23 @@
             const windSpeed = document.getElementById('windSpeed');
             const feelsLike = document.getElementById('feelsLike');
 
-            // Add event listener for the search button
             searchButton.addEventListener('click', () => {
                 fetchWeather(cityInput.value);
             });
 
-            // Add event listener for the 'Enter' key in the input field
             cityInput.addEventListener('keydown', (event) => {
                 if (event.key === 'Enter') {
                     fetchWeather(cityInput.value);
                 }
             });
 
-            // Function to fetch weather data
             async function fetchWeather(city) {
                 if (city.trim() === '') {
                     showError('Please enter a city name.');
                     return;
                 }
-                
-                if (apiKey === 'YOUR_API_KEY') {
-                    showError('Please replace "YOUR_API_KEY" with a real OpenWeatherMap API key in the script.');
-                    return;
-                }
+        
 
-                // Show loader and hide other sections
                 showLoader(true);
                 hideError();
                 hideWeather();
@@ -181,7 +160,6 @@
                 }
             }
 
-            // Function to update the UI with weather data
             function updateUI(data) {
                 cityName.textContent = data.name;
                 weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
@@ -195,7 +173,6 @@
                 showWeather();
             }
 
-            // --- UI Helper Functions ---
 
             function showLoader(show) {
                 if (show) {
